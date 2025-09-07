@@ -22,43 +22,62 @@
 
 <body>
       <header>
-            <nav>
-                  <div class="navbar bg-base-100 shadow-sm bg-[#15803D] px-10">
-                        <div class="navbar-start">
-                              <div class="dropdown">
-                                    <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                      d="M4 6h16M4 12h8m-8 6h16" />
-                                          </svg>
-                                    </div>
-                                    <ul tabindex="0"
-                                          class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                                          <li><a>About</a></li>
-                                          <li><a>Gallery</a></li>
-                                          <li><a>Plant a Tree</a></li>
-                                    </ul>
+            <!-- navbar section -->
+            <nav class="navbar bg-base-100 shadow-sm bg-[#15803D] md:px-10">
+                  <div class="navbar-start">
+                        <div class="dropdown">
+                              <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none"
+                                          viewBox="0 0 24 24" stroke="currentColor">
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 6h16M4 12h8m-8 6h16" />
+                                    </svg>
                               </div>
-                              <a class="btn btn-ghost text-xl text-white">Green Earth</a>
-                        </div>
-                        <div class="navbar-center hidden lg:flex">
-                              <ul class="menu menu-horizontal px-1 text-white">
+                              <ul tabindex="0"
+                                    class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                                     <li><a>About</a></li>
-                                    <li>
-                                          <summary>Gallery</summary>
-                                    </li>
+                                    <li><a>Gallery</a></li>
                                     <li><a>Plant a Tree</a></li>
                               </ul>
                         </div>
-                        <div class="navbar-end ">
-                              <a class="btn bg-[#FACC15] border border-none shadow-none rounded-full text-[#15803D]">Plant
-                                    a Tree</a>
-                        </div>
+                        <a class="btn btn-ghost text-xl text-white hover:none">Green Earth</a>
+                  </div>
+                  <div class="navbar-center hidden lg:flex">
+                        <ul class="flex gap-4 px-1 text-white hover:opacity-5 decoration-solid">
+                              <li><a>About</a></li>
+                              <li><a>Gallery</a></li>
+                              <li><a>Plant a Tree</a></li>
+                        </ul>
+                  </div>
+                  <div class="navbar-end ">
+                        <a
+                              class="btn bg-[#FACC15] border border-none shadow-none rounded-full text-[#15803D]  hover:opacity-85">Plant
+                              a Tree</a>
                   </div>
             </nav>
       </header>
-      <main></main>
+      <main>
+            <!-- banner section -->
+            <section class="flex justify-between items-center bg-[#cff0dc]">
+                  <figure>
+                        <img class="hidden md:block" src="./assets/hero-leaf1.png" alt="">
+                  </figure>
+                  <div class="text-center space-y-2 md:p-0 p-2">
+                        <h1 class="md:text-4xl text-2xl font-bold text-[#1F2937]">Plant a Tree, Grow a Future</h1>
+                        <p class="text-gray-500">Join our mission to plant 1 million trees and make the Earth greener
+                              for future
+                              generations.</p>
+                        <div class="mt-1 ">
+                              <a
+                                    class="btn bg-[#FACC15] border border-none shadow-none rounded-full text-[#15803D]  hover:opacity-85">Plant
+                                    a Tree</a>
+                        </div>
+                  </div>
+                  <figure>
+                        <img class="hidden md:block" src="./assets/hero-leaf2.png" alt="">
+                  </figure>
+            </section>
+      </main>
       <footer></footer>
 </body>
 
