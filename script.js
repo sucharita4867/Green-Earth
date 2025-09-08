@@ -5,24 +5,26 @@ fetch(url)
 
 const categories = (cats) => {
   const categoriesContainer = document.getElementById("categories-container");
-  categoriesContainer.innerHTML = "";
+  categoriesContainer.innerHTML = ""; // clear আগে
+
   for (let categorie of cats) {
     const categoriesDiv = document.createElement("div");
     categoriesDiv.innerHTML = `
-    <div id="categories-container" class="hover:text-white col-span-2 text-[#1f2937] hover:bg-[#15803D] rounded-sm space-y-1 py-1 pl-1">
-                              
-                              <p>${categorie.category_name}</p>
-                        </div>
-    `;
+    <div id="categories-container" class="  hover:text-white col-span-2 text-[#1f2937] hover:bg-[#15803D] rounded-sm space-y-4 py-2  text-center bg-[#cff0dc] font-semibold block">
+                               <p>${categorie.category_name}</p>
+                         </div>
+     `;
+    categoriesDiv.addEventListener("click", () => {
+      const url = `https://openapi.programming-hero.com/api/category/${categorie.id}`;
+      console.log(url);
+      fetch(url)
+        .then((res) => res.json)
+        .then((data) => console.log(data));
+    });
     categoriesContainer.append(categoriesDiv);
   }
 };
-// "id": 1,
-// "image": "https://i.ibb.co.com/cSQdg7tf/mango-min.jpg",
-// "name": "Mango Tree",
-// "description": "A fast-growing tropical tree that produces delicious, juicy mangoes during summer. Its dense green canopy offers shade, while its sweet fruits are rich in vitamins and minerals.",
-// "category": "Fruit Tree",
-// "price": 500
+
 const cardUrl = "https://openapi.programming-hero.com/api/plants";
 fetch(cardUrl)
   .then((res) => res.json())
