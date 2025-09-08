@@ -1,3 +1,5 @@
+// const cardContainer = document.getElementById('card-container')
+
 const url = "https://openapi.programming-hero.com/api/categories";
 fetch(url)
   .then((res) => res.json())
@@ -37,18 +39,15 @@ const categories = (cats) => {
     const categoryItem = (items) => {
       const cardBox = document.getElementById("card-container");
       cardBox.innerHTML = "";
-      // const lordCardDetail = (id) => {
-      //   const url = `https://openapi.programming-hero.com/api/plant/${cardItem.id}`;
-      //   console.log(url);
-      // };
       items.forEach((cardItem) => {
-        // console.log(cardItem.id);
-
         const card = document.createElement("div");
+        // categorys click cards
         card.innerHTML = `
     
-    <div class="bg-white md:p-3 p-1 space-y-3 rounded-md">
-                                    <img class="rounded-md" src="${cardItem.image}" alt="">
+    <div  class="bg-white md:p-3 p-1 space-y-3 rounded-md">
+                                    <div class="border border-black">
+                                    <img class="rounded-md h-64 w-full flex justify-center items-center border border-black" src="${cardItem.image}" alt="">
+                                    </div>
                                     <div class="space-y-2">
                                           <h1 class="font-semibold">${cardItem.name}</h1>
                                           <p class="text-[#1f2937] text-sm">${cardItem.description}</p>
@@ -59,7 +58,7 @@ const categories = (cats) => {
                                           </div>
                                           <div
                                                 class="w-full text-center bg-[#15803D] text-white md:px-6 md:py-3 px-2 py-1 rounded-full hover:opacity-85">
-                                                <button class="">Add to Cart</button>
+                                                <button id="card-btn" class="">Add to Cart</button>
                                           </div>
                                     </div>
                               </div>
@@ -73,14 +72,14 @@ const categories = (cats) => {
         const cardDetails = (element) => {
           console.log(element);
           const detailsBox = document.getElementById("detailsContainer");
+          // categorys modal cards
           detailsBox.innerHTML = `
           <div  class="bg-white  p-3  rounded-md">
                               <h1 class="font-bold text-lg">${element.name}</h1>
-                             <div class="border border-black h-64">
-                                    <img class="rounded-md  w-full flex justify-center items-center border border-black" src="${element.image}" alt="">
-                                    </div">
-                                    
-                              <div class="space-y-2">
+                              <div class="border border-black w-full">
+                              <img class="rounded-md my-2 h-60  border border-black" src="${element.image}" alt="">
+                              </div>
+                              <div class="space-y-1">
                                     <h2 class="text-gray-600"><span class="text-[#1f2937] font-semibold">category:
                                           </span> ${element.category}</h2>
                                     <p class="text-gray-600"><span class="text-[#1f2937] font-semibold">Price:
@@ -101,6 +100,39 @@ const categories = (cats) => {
   }
 };
 
+const hendleClick = (id) => {
+  // alert(`${id}`);
+  fetch(` https://openapi.programming-hero.com/api/plant/${id}`)
+    .then((res) => res.json())
+    .then((data) => plant(data.plants));
+  const plant = (item) => {
+    alert(`${item.name} has been added to the card.`);
+    // console.log(item);
+    let clickOk = `${item}`;
+    if (clickOk) {
+      const sidebarContainer = document.getElementById("side-card-container");
+      const newCard = document.createElement("div");
+      newCard.innerHTML = `
+      <div class="flex mt-2 p-3 justify-between items-center bg-[#cff0dc98]">
+                                          <div>
+                                                <h1 class="font-bold">${item.name}</h1>
+                                                <p class="text-[#1f2937]">${item.price}</p>
+                                          </div>
+                                          <div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                      stroke-width="1.5" stroke="currentColor" class="size-6 font-bold text-red-700">
+                                                      <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M6 18 18 6M6 6l12 12" />
+                                                </svg>
+
+                                          </div>
+                                    </div>
+      `;
+      sidebarContainer.append(newCard);
+    }
+  };
+};
+
 const cardUrl = "https://openapi.programming-hero.com/api/plants";
 fetch(cardUrl)
   .then((res) => res.json())
@@ -109,14 +141,16 @@ const cards = (cardItems) => {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
   for (let item of cardItems) {
+    // console.log(item);
     const cardDiv = document.createElement("div");
+    // displays cards
     cardDiv.innerHTML = `
     
-    <div class="bg-white md:p-3    p-1 space-y-3 rounded-md">
+    <div id="card-container" class="bg-white md:p-3    p-1 space-y-3 rounded-md">
                                    <div class="border border-black">
                                     <img class="rounded-md h-64 w-full flex justify-center items-center border border-black" src="${item.image}" alt="">
-                                    </div">
-                                   </div>
+                                    </div>
+                                    <div class="space-y-2">
                                           <h1 class="font-semibold">${item.name}</h1>
                                           <p class="text-[#1f2937] text-sm">${item.description}</p>
                                           <div class="mt-1 flex justify-between items-center">
@@ -126,12 +160,17 @@ const cards = (cardItems) => {
                                           </div>
                                           <div
                                                 class="mt-2 w-full text-center bg-[#15803D] text-white md:px-6 md:py-2 px-2 py-1 rounded-full hover:opacity-85">
-                                                <button class="">Add to Cart</button>
+                                                <button id="${item.id}" onClick="hendleClick(${item.id})" class="">Add to Cart</button>
                                           </div>
                                     </div>
                               </div>
     `;
-
     cardContainer.append(cardDiv);
   }
+  // const cardBtn = document
+  //   .querySelector(`#${item.id}`)
+  //   .addEventListener("click", () => {
+  //     console.log("btn click");
+  //   });
 };
+// --------------------------------------------------------
