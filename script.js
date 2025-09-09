@@ -1,11 +1,12 @@
-// const cardContainer = document.getElementById('card-container')
-// function getPriceText(id) {
-//   const cardPrice = getPriceText("card-price");
-//   const element = document.getElementById(id);
-//   const elementValue = element.innerText;
-//   const elementValueNumber = parseInt(elementValue);
-//   console.log(elementValueNumber);
-// }
+const manageSpinner = (status) => {
+  if (status == true) {
+    document.getElementById("spinner").classList.remove("hidden");
+    document.getElementById("main-container").classList.add("hidden");
+  } else {
+    document.getElementById("main-container").classList.remove("hidden");
+    document.getElementById("spinner").classList.add("hidden");
+  }
+};
 
 const url = "https://openapi.programming-hero.com/api/categories";
 fetch(url)
@@ -50,9 +51,9 @@ const categories = (cats) => {
         // categorys click cards
         card.innerHTML = `
     
-    <div  class="bg-white md:p-3 p-1 space-y-3 rounded-md">
-                                    <div class="border border-black">
-                                    <img class="rounded-md h-64 w-full flex justify-center items-center border border-black" src="${cardItem.image}" alt="">
+    <div  class="bg-white md:p-3 p-1 shadow-xl space-y-3 rounded-md">
+                                    <div class="">
+                                    <img class="rounded-md h-64 w-full flex justify-center items-center" src="${cardItem.image}" alt="">
                                     </div>
                                     <div class="space-y-2">
                                           <h1 class="font-semibold">${cardItem.name}</h1>
@@ -60,11 +61,11 @@ const categories = (cats) => {
                                           <div class="flex justify-between items-center">
                                                 <p class="text-[#15803d] bg-[#dcfce7] md:px-2 md:py-1 rounded-full">${cardItem.category}
                                                 </p>
-                                                <p class="font-semibold">৳<span>${cardItem.price}</span></p>
+                                                <p class="font-semibold">৳<span class="text-[#15803D]">${cardItem.price}</span></p>
                                           </div>
                                           <div
                                                 class="w-full text-center bg-[#15803D] text-white md:px-6 md:py-3 px-2 py-1 rounded-full hover:opacity-85">
-                                                <button id="card-btn" class="">Add to Cart</button>
+                                                <button id="card-btn" onClick="hendleClick(${cardItem.id})" class="">Add to Cart</button>
                                           </div>
                                     </div>
                               </div>
@@ -83,9 +84,7 @@ const categories = (cats) => {
           detailsBox.innerHTML = `
           <div  class="bg-white  p-3  rounded-md">
                               <h1 class="font-bold text-lg">${element.name}</h1>
-                              <div class="border border-black w-full">
-                              <img class="rounded-md my-2 h-60  border border-black" src="${element.image}" alt="">
-                              </div>
+                              <img class="rounded-md my-2 h-60 w-full  border border-black" src="${element.image}" alt="">
                               <div class="space-y-1">
                                     <h2 class="text-gray-600"><span class="text-[#1f2937] font-semibold">category:
                                           </span> ${element.category}</h2>
@@ -107,25 +106,27 @@ const categories = (cats) => {
   }
 };
 
+// ============================ display ====================
 let totalPrice = 0;
 const hendleClick = (id) => {
-  fetch(` https://openapi.programming-hero.com/api/plant/${id}`)
+  console.log(id);
+  fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
     .then((res) => res.json())
     .then((data) => plant(data.plants));
   const plant = (item) => {
-    console.log(item);
-    alert(`${item.name} has been added to the card.`);
+    // console.log(item);
+    const clickOk = confirm(`${item.name} has been added to the card.`);
 
     const sidebarContainer = document.getElementById("side-card-container");
     const totalPriceEl = document.getElementById("totalPrice");
 
-    let clickOk = `${item}`;
+    // let clickOk = `${item}`;
     if (clickOk) {
       const sidebarContainer = document.getElementById("side-card-container");
       let newCard = document.createElement("div");
       // sidebar container
       newCard.innerHTML = `
-      <div class="flex mt-2 p-3 justify-between items-center bg-[#cff0dc98]">
+      <div class="md:flex mt-2 p-3   justify-between items-center bg-[#cff0dc98]">
                                           <div>
                                                 <h1 class="font-bold">${item.name}</h1>
                                                 <p class="text-[#1f2937]">৳<span id="card-price">${item.price}</span></p>
@@ -143,10 +144,10 @@ const hendleClick = (id) => {
       `;
       totalPrice += parseFloat(item.price);
       totalPriceEl.innerText = totalPrice;
+
       newCard.querySelector(".delete-btn").addEventListener("click", () => {
         newCard.remove();
         totalPrice -= parseFloat(item.price);
-        totalPriceEl.innerText = totalPrice;
       });
       sidebarContainer.append(newCard);
     }
@@ -154,6 +155,7 @@ const hendleClick = (id) => {
 };
 
 const cardUrl = "https://openapi.programming-hero.com/api/plants";
+manageSpinner(true);
 fetch(cardUrl)
   .then((res) => res.json())
   .then((data) => cards(data.plants));
@@ -161,13 +163,12 @@ const cards = (cardItems) => {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
   for (let item of cardItems) {
-    // console.log(item);
     const cardDiv = document.createElement("div");
     // displays cards
     cardDiv.innerHTML = `
-    <div id="card-container" class="bg-white md:p-3    p-1 space-y-3 rounded-md">
-                                   <div class="border border-black">
-                                    <img class="rounded-md h-64 w-full flex justify-center items-center border border-black" src="${item.image}" alt="">
+    <div class="bg-white md:p-3 h-full shadow-xl p-1 space-y-3 rounded-md">
+                                   <div class="">
+                                    <img class="rounded-md h-64 w-full flex justify-center items-center " src="${item.image}" alt="">
                                     </div>
                                     <div class="space-y-2">
                                           <h1 class="font-semibold">${item.name}</h1>
@@ -175,11 +176,11 @@ const cards = (cardItems) => {
                                           <div class="mt-1 flex justify-between items-center">
                                                 <p class="text-[#15803d] bg-[#dcfce7] md:px-2 md:py-1 rounded-full">${item.category}
                                                 </p>
-                                                <p class="font-semibold">৳<span>${item.price}</span></p>
+                                                <p class="font-semibold">৳<span class="text-[#15803D]">${item.price}</span></p>
                                           </div>
                                           <div
                                                 class="mt-2 w-full text-center bg-[#15803D] text-white md:px-6 md:py-2 px-2 py-1 rounded-full hover:opacity-85">
-                                                <button id="${item.id}" onClick="hendleClick(${item.id})" class="">Add to Cart</button>
+                                                <button type="button" id="${item.id}" onClick="hendleClick(${item.id})" class="">Add to Cart</button>
                                           </div>
                                     </div>
                               </div>
@@ -196,11 +197,11 @@ const cards = (cardItems) => {
       const detailsBox = document.getElementById("detailsContainer");
       // display modal cards
       detailsBox.innerHTML = `
-          <div  class="bg-white  p-3  rounded-md">
+          <div  class="bg-white   p-3  rounded-md">
                               <h1 class="font-bold text-lg">${element.name}</h1>
-                              <div class="border border-black w-full">
-                              <img class="rounded-md my-2 h-60  border border-black" src="${element.image}" alt="">
-                              </div>
+                              
+                              <img class="rounded-md my-2 h-60 w-full  " src="${element.image}" alt="">
+                              
                               <div class="space-y-1">
                                     <h2 class="text-gray-600"><span class="text-[#1f2937] font-semibold">category:
                                           </span> ${element.category}</h2>
@@ -217,5 +218,6 @@ const cards = (cardItems) => {
     };
     cardContainer.append(cardDiv);
   }
+  manageSpinner(false);
 };
 // --------------------------------------------------------
