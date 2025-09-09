@@ -84,7 +84,7 @@ const categories = (cats) => {
           detailsBox.innerHTML = `
           <div  class="bg-white  p-3  rounded-md">
                               <h1 class="font-bold text-lg">${element.name}</h1>
-                              <img class="rounded-md my-2 h-60 w-full  border border-black" src="${element.image}" alt="">
+                              <img class="rounded-md my-2 h-60 w-full  " src="${element.image}" alt="">
                               <div class="space-y-1">
                                     <h2 class="text-gray-600"><span class="text-[#1f2937] font-semibold">category:
                                           </span> ${element.category}</h2>
