@@ -126,7 +126,7 @@ const hendleClick = (id) => {
       let newCard = document.createElement("div");
       // sidebar container
       newCard.innerHTML = `
-      <div class="md:flex mt-2 p-3   justify-between items-center bg-[#cff0dc98]">
+      <div class="md:flex mt-2 p-3 m-2 rounded-lg   justify-between items-center bg-[#cff0dc98]">
                                           <div>
                                                 <h1 class="font-bold">${item.name}</h1>
                                                 <p class="text-[#1f2937]">৳<span id="card-price">${item.price}</span></p>
@@ -148,6 +148,7 @@ const hendleClick = (id) => {
       newCard.querySelector(".delete-btn").addEventListener("click", () => {
         newCard.remove();
         totalPrice -= parseFloat(item.price);
+        totalPriceEl.innerText = totalPrice;
       });
       sidebarContainer.append(newCard);
     }
@@ -166,7 +167,7 @@ const cards = (cardItems) => {
     const cardDiv = document.createElement("div");
     // displays cards
     cardDiv.innerHTML = `
-    <div class="bg-white md:p-3 h-full shadow-xl p-1 space-y-3 rounded-md">
+    <div class="bg-white md:p-3 h-full shadow-2xl p-1 space-y-3 rounded-md">
                                    <div class="">
                                     <img class="rounded-md h-64 w-full flex justify-center items-center " src="${item.image}" alt="">
                                     </div>
