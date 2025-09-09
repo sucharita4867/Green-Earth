@@ -30,7 +30,6 @@ const categories = (cats) => {
     };
     categoriesDiv.addEventListener("click", () => {
       const url = `https://openapi.programming-hero.com/api/category/${categorie.id}`;
-      // console.log(url);
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
@@ -51,13 +50,13 @@ const categories = (cats) => {
         // categorys click cards
         card.innerHTML = `
     
-    <div  class="bg-white md:p-3 p-1 shadow-xl space-y-3 rounded-md">
+    <div  class="bg-white md:p-3 p-1 mx-auto h-fit shadow-xl space-y-3 rounded-md">
                                     <div class="">
                                     <img class="rounded-md h-64 w-full flex justify-center items-center" src="${cardItem.image}" alt="">
                                     </div>
                                     <div class="space-y-2">
                                           <h1 class="font-semibold">${cardItem.name}</h1>
-                                          <p class="text-[#1f2937] text-sm">${cardItem.description}</p>
+                                          <p class="text-[#1f2937] text-sm h-28">${cardItem.description}</p>
                                           <div class="flex justify-between items-center">
                                                 <p class="text-[#15803d] bg-[#dcfce7] md:px-2 md:py-1 rounded-full">${cardItem.category}
                                                 </p>
@@ -114,13 +113,11 @@ const hendleClick = (id) => {
     .then((res) => res.json())
     .then((data) => plant(data.plants));
   const plant = (item) => {
-    // console.log(item);
     const clickOk = confirm(`${item.name} has been added to the card.`);
 
     const sidebarContainer = document.getElementById("side-card-container");
     const totalPriceEl = document.getElementById("totalPrice");
 
-    // let clickOk = `${item}`;
     if (clickOk) {
       const sidebarContainer = document.getElementById("side-card-container");
       let newCard = document.createElement("div");
@@ -154,7 +151,6 @@ const hendleClick = (id) => {
     }
   };
 };
-
 const cardUrl = "https://openapi.programming-hero.com/api/plants";
 manageSpinner(true);
 fetch(cardUrl)
@@ -167,13 +163,13 @@ const cards = (cardItems) => {
     const cardDiv = document.createElement("div");
     // displays cards
     cardDiv.innerHTML = `
-    <div class="bg-white md:p-3 h-full shadow-2xl p-1 space-y-3 rounded-md">
+    <div class="bg-white h-fit md:p-3   shadow-2xl p-1 gap-y-3 gap-x-2 rounded-md">
                                    <div class="">
                                     <img class="rounded-md h-64 w-full flex justify-center items-center " src="${item.image}" alt="">
                                     </div>
                                     <div class="space-y-2">
                                           <h1 class="font-semibold">${item.name}</h1>
-                                          <p class="text-[#1f2937] text-sm">${item.description}</p>
+                                          <p class="text-[#1f2937] text-sm h-28 overflow-hidden">${item.description}</p>
                                           <div class="mt-1 flex justify-between items-center">
                                                 <p class="text-[#15803d] bg-[#dcfce7] md:px-2 md:py-1 rounded-full">${item.category}
                                                 </p>
@@ -221,4 +217,3 @@ const cards = (cardItems) => {
   }
   manageSpinner(false);
 };
-// --------------------------------------------------------
