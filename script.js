@@ -1,4 +1,11 @@
 // const cardContainer = document.getElementById('card-container')
+// function getPriceText(id) {
+//   const cardPrice = getPriceText("card-price");
+//   const element = document.getElementById(id);
+//   const elementValue = element.innerText;
+//   const elementValueNumber = parseInt(elementValue);
+//   console.log(elementValueNumber);
+// }
 
 const url = "https://openapi.programming-hero.com/api/categories";
 fetch(url)
@@ -18,7 +25,6 @@ const categories = (cats) => {
      `;
     const removeActive = () => {
       const categoryBtn = document.querySelectorAll(".cat-btn");
-      // console.log(categoryBtn);
       categoryBtn.forEach((btn) => btn.classList.remove("active"));
     };
     categoriesDiv.addEventListener("click", () => {
@@ -54,7 +60,7 @@ const categories = (cats) => {
                                           <div class="flex justify-between items-center">
                                                 <p class="text-[#15803d] bg-[#dcfce7] md:px-2 md:py-1 rounded-full">${cardItem.category}
                                                 </p>
-                                                <p class="font-semibold">${cardItem.price}</p>
+                                                <p class="font-semibold">৳<span>${cardItem.price}</span></p>
                                           </div>
                                           <div
                                                 class="w-full text-center bg-[#15803D] text-white md:px-6 md:py-3 px-2 py-1 rounded-full hover:opacity-85">
@@ -69,6 +75,7 @@ const categories = (cats) => {
             .then((res) => res.json())
             .then((json) => cardDetails(json.plants));
         });
+        // categorys click cards details
         const cardDetails = (element) => {
           console.log(element);
           const detailsBox = document.getElementById("detailsContainer");
@@ -83,7 +90,7 @@ const categories = (cats) => {
                                     <h2 class="text-gray-600"><span class="text-[#1f2937] font-semibold">category:
                                           </span> ${element.category}</h2>
                                     <p class="text-gray-600"><span class="text-[#1f2937] font-semibold">Price:
-                                          </span>${element.price}
+                                          </span>৳<span>${element.price}</span>
                                     </p>
                                     <p class="text-gray-600 "><span class="text-[#1f2937] font-semibold">Description:
                                           </span>${element.description}</p>
@@ -100,34 +107,47 @@ const categories = (cats) => {
   }
 };
 
+let totalPrice = 0;
 const hendleClick = (id) => {
-  // alert(`${id}`);
   fetch(` https://openapi.programming-hero.com/api/plant/${id}`)
     .then((res) => res.json())
     .then((data) => plant(data.plants));
   const plant = (item) => {
+    console.log(item);
     alert(`${item.name} has been added to the card.`);
-    // console.log(item);
+
+    const sidebarContainer = document.getElementById("side-card-container");
+    const totalPriceEl = document.getElementById("totalPrice");
+
     let clickOk = `${item}`;
     if (clickOk) {
       const sidebarContainer = document.getElementById("side-card-container");
-      const newCard = document.createElement("div");
+      let newCard = document.createElement("div");
+      // sidebar container
       newCard.innerHTML = `
       <div class="flex mt-2 p-3 justify-between items-center bg-[#cff0dc98]">
                                           <div>
                                                 <h1 class="font-bold">${item.name}</h1>
-                                                <p class="text-[#1f2937]">${item.price}</p>
+                                                <p class="text-[#1f2937]">৳<span id="card-price">${item.price}</span></p>
                                           </div>
-                                          <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                          <div class="delete-btn" >
+                                                <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                       stroke-width="1.5" stroke="currentColor" class="size-6 font-bold text-red-700">
                                                       <path stroke-linecap="round" stroke-linejoin="round"
                                                             d="M6 18 18 6M6 6l12 12" />
                                                 </svg>
 
                                           </div>
+                                        
                                     </div>
       `;
+      totalPrice += parseFloat(item.price);
+      totalPriceEl.innerText = totalPrice;
+      newCard.querySelector(".delete-btn").addEventListener("click", () => {
+        newCard.remove();
+        totalPrice -= parseFloat(item.price);
+        totalPriceEl.innerText = totalPrice;
+      });
       sidebarContainer.append(newCard);
     }
   };
@@ -145,7 +165,6 @@ const cards = (cardItems) => {
     const cardDiv = document.createElement("div");
     // displays cards
     cardDiv.innerHTML = `
-    
     <div id="card-container" class="bg-white md:p-3    p-1 space-y-3 rounded-md">
                                    <div class="border border-black">
                                     <img class="rounded-md h-64 w-full flex justify-center items-center border border-black" src="${item.image}" alt="">
@@ -156,7 +175,7 @@ const cards = (cardItems) => {
                                           <div class="mt-1 flex justify-between items-center">
                                                 <p class="text-[#15803d] bg-[#dcfce7] md:px-2 md:py-1 rounded-full">${item.category}
                                                 </p>
-                                                <p class="font-semibold">${item.price}</p>
+                                                <p class="font-semibold">৳<span>${item.price}</span></p>
                                           </div>
                                           <div
                                                 class="mt-2 w-full text-center bg-[#15803D] text-white md:px-6 md:py-2 px-2 py-1 rounded-full hover:opacity-85">
@@ -165,12 +184,38 @@ const cards = (cardItems) => {
                                     </div>
                               </div>
     `;
+    // display card details
+    cardDiv.querySelector("h1").addEventListener("click", () => {
+      const cardDetailsUrl = `https://openapi.programming-hero.com/api/plant/${item.id}`;
+      fetch(cardDetailsUrl)
+        .then((res) => res.json())
+        .then((json) => cardDetails(json.plants));
+    }); // display card details
+    const cardDetails = (element) => {
+      console.log(element);
+      const detailsBox = document.getElementById("detailsContainer");
+      // display modal cards
+      detailsBox.innerHTML = `
+          <div  class="bg-white  p-3  rounded-md">
+                              <h1 class="font-bold text-lg">${element.name}</h1>
+                              <div class="border border-black w-full">
+                              <img class="rounded-md my-2 h-60  border border-black" src="${element.image}" alt="">
+                              </div>
+                              <div class="space-y-1">
+                                    <h2 class="text-gray-600"><span class="text-[#1f2937] font-semibold">category:
+                                          </span> ${element.category}</h2>
+                                    <p class="text-gray-600"><span class="text-[#1f2937] font-semibold">Price:
+                                          </span>৳<span>${element.price}</span>
+                                    </p>
+                                    <p class="text-gray-600 "><span class="text-[#1f2937] font-semibold">Description:
+                                          </span>${element.description}</p>
+
+                              </div>
+                        </div>
+          `;
+      document.getElementById("my_modal_5").showModal();
+    };
     cardContainer.append(cardDiv);
   }
-  // const cardBtn = document
-  //   .querySelector(`#${item.id}`)
-  //   .addEventListener("click", () => {
-  //     console.log("btn click");
-  //   });
 };
 // --------------------------------------------------------
