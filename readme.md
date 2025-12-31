@@ -1,23 +1,55 @@
-1. What is the difference between var, let, and const?
-   ans:
-   var: old way, can be redeclared and updated. function-scoped
-   let : new way,can be update but not redeclared in same scoped.block scoped.
-   const : can be update or redeclared. block scoped.
+# 🌱 Green-Earth
 
-2) What is the difference between map(), forEach(), and filter()?
-   ans:
-   map: Runs a function each item and returns new array
-   forEach: Just runs a function on each item. Does not return new array.
-   filter: Checks condition and returns a new array with only items that pass.
+## 📌 Project Overview
 
-3) What are arrow functions in ES6?
-   ans:
-   shorter way to write functions in ES6.
+**Green-Earth** is a client-side web application designed as an online tree and plant shop. Users can browse available plants, view detailed information, and add selected plants to a cart. The platform also provides tree-care guidance from mentors on the home page to help users learn how to properly take care of plants and promote a greener environment.
 
-4) How does destructuring assignment work in ES6?
-   ans:
-   Destructuring assignment in ES6 lets you unpack values from arrays and objects into separate variables easily.
+---
 
-5) Explain template literals in ES6. How are they different from string concatenation?
-   ans:
-   A new way to write strings using backticks.Allow variables and expressions inside.Support multi-line strings easily.
+## 🎯 Purpose
+
+The main purpose of Green-Earth is to encourage people to plant and care for trees by offering a simple and user-friendly platform where users can explore plants, learn proper tree-care tips, and manage their profile information easily.
+
+---
+
+## 🌐 Live Project Link
+
+- **Live Website:  https://delightful-basbousa-c863c6.netlify.app/**
+---
+
+## ✨ Core Features
+
+- 🌿 Browse and view all available plants
+- 📄 View detailed information of each plant
+- 🛒 Add plants to cart from the available plant list
+- 🏡 Home page with tree-care tips and guidance from mentors
+- 👤 Update user profile information (email and profile image)
+- 📱 Fully responsive and clean user interface
+
+---
+
+## 🛠️ Technologies Used
+
+- HTML5  
+- CSS3  
+- JavaScript  
+- Tailwind CSS  
+- DaisyUI  
+
+---
+
+## 📦 Dependencies Used
+
+- Tailwind CSS  
+- DaisyUI  
+- Any other libraries or plugins used in the project  
+
+---
+
+## 🚀 How to Run the Project Locally
+
+Follow these steps to run the project on your local machine:
+
+### 1️⃣ Clone the Repository
+```bash
+https://github.com/sucharita4867/Green-Earth.git
