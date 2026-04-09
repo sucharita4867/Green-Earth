@@ -48,7 +48,7 @@ The main purpose of Green-Earth is to encourage people to plant and care for tre
 
 ## 🚀 How to Run the Project Locally
 
-Follow these steps to run the project on your local machine:
+Follow these steps to run the project on your local machine
 
 ### Clone the Repository
 ```bash
