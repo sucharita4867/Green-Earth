@@ -4,7 +4,7 @@
 
 **Green-Earth** is a client-side web application designed as an online tree and plant shop. Users can browse available plants, view detailed information, and add selected plants to a cart. The platform also provides tree-care guidance from mentors on the home page to help users learn how to properly take care of plants and promote a greener environment.
 
----
+--
 
 ## 🎯 Purpose
 
