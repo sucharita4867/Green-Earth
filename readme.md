@@ -10,7 +10,7 @@
 
 The main purpose of Green-Earth is to encourage people to plant and care for trees by offering a simple and user-friendly platform where users can explore plants, learn proper tree-care tips, and manage their profile information easily.
 
----
+--
 
 ## 🌐 Live Project Link
 
@@ -26,7 +26,7 @@ The main purpose of Green-Earth is to encourage people to plant and care for tre
 - 👤 Update user profile information (email and profile image)
 - 📱 Fully responsive and clean user interface
 
----
+--
 
 ## 🛠️ Technologies Used
 
