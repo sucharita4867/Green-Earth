@@ -15,7 +15,7 @@ The main purpose of Green-Earth is to encourage people to plant and care for tre
 ## 🌐 Live Project Link
 
 - **Live Website:  https://delightful-basbousa-c863c6.netlify.app/**
----
+--
 
 ## ✨ Core Features
 
@@ -36,7 +36,7 @@ The main purpose of Green-Earth is to encourage people to plant and care for tre
 - Tailwind CSS  
 - DaisyUI  
 
----
+--
 
 ## 📦 Dependencies Used
 
