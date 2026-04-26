@@ -52,4 +52,4 @@ Follow these steps to run the project on your local machine
 
 ### Clone the Repository
 ```bash
-https://github.com/sucharita4867/Green-Earth.git
+https://github.com/sucharita4867/Green-Earth.git/
