@@ -26,7 +26,7 @@ The main purpose of Green-Earth is to encourage people to plant and care for tre
 - 👤 Update user profile information (email and profile image)
 - 📱 Fully responsive and clean user interface
 
----
+--
 
 ## 🛠️ Technologies Used
 
